@@ -14,65 +14,74 @@
 </head>
 <body>
 
-    <div class="header">
-        <a id="photo-clickable" href="">
-            <img id="photo" src="website_logo.jfif" alt="">
-        </a>
-        <h1 id="track-name">WELCOME, SEARCH A SPOTIFY SONG!</h1>
-
-        <div class="track-explicit-container hide">
-            <h1 id="track-explicit"></h1>
-        </div>
-
+    <header class="top-bar">
         <a href="index.html">
             <button id="switch-spoble-artist-website">Search Artists</button>
         </a>
-
         <h2 id="beta-text">BETA</h2>
+    </header>
 
-    </div>
+    <div class="dashboard-grid">
 
-    <div class="middle">
-        <div class="popularity-container hide">
-            <h1 id="track-popularity-title">POPULARITY</h1>
-            <h1 id="track-popularity-number"></h1>
-            <div class="popularity-scale">
-                <div class="popularity-bar" id="popularity-bar"></div>
+        <div class="grid-area-left">
+            <div class="popularity-container hide">
+                <h1 id="track-popularity-title">POPULARITY</h1>
+                <h1 id="track-popularity-number"></h1>
+                <div class="popularity-scale">
+                    <div class="popularity-bar" id="popularity-bar"></div>
+                </div>
             </div>
         </div>
 
-        <div class="duration-container hide">
-            <h1 id="track-duration-title">duration</h1>
-            <h2 id="track-duration"></h2>
-        </div>
+        <div class="grid-area-center">
+            
+            <a id="photo-clickable" href="">
+                <img id="photo" src="website_logo.jfif" alt="Track Cover">
+            </a>
+            <h1 id="track-name">WELCOME, SEARCH A SPOTIFY SONG!</h1>
 
-        <div class="album-and-release-date hide">
-            <h1 id="track-album-title"></h1>
-            <div class="album-date-container">
-                <h2 id="track-album"></h2>
-                <h4 id="track-release-date"></h4>
+            <div class="track-explicit-container hide">
+                <h1 id="track-explicit"></h1>
+            </div>
+
+            <div class="duration-container hide">
+                <h1 id="track-duration-title">duration</h1>
+                <h2 id="track-duration"></h2>
+            </div>
+
+            <audio class="hide" controls>
+                <source src="" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <div class="search-section">
+                <div class="input-field-row">
+                    <input id="input-field" placeholder="TRACK NAME" type="text">
+                    <button id="trash-button" onclick="trashButton()">
+                        <i class="fa-solid fa-trash fa-2x" style="color: #ffffff;"></i>
+                    </button>
+                </div>
+                <button id="search-button" class="button-5" role="button" onclick="display_track_display()">Search</button>
             </div>
         </div>
-    </div>
 
-    <div class="footer">
+        <div class="grid-area-right">
+            
+            <div class="album-and-release-date hide">
+                <h1 id="track-album-title"></h1>
+                <div class="album-date-container">
+                    <h2 id="track-album"></h2>
+                    <h4 id="track-release-date"></h4>
+                </div>
+            </div>
 
-        <div class="input-field-row">
-            <input id="input-field" placeholder="TRACK NAME" type="text">
-            <button id="trash-button" onclick="trashButton()"><i class="fa-solid fa-trash fa-2x" style="color: #ffffff;"></i></button>
+            <div class="track-artist-container hide">
+                <h1 id="track-artist-title"></h1>
+                <h2 id="track-artist"></h2>
+            </div>
+
         </div>
-        <button id="search-button" class="button-5" role="button" onclick="display_track_display()">Search</button>
 
-        <audio class="hide" controls>
-            <source src="" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-
-        <div class="track-artist-container hide">
-            <h1 id="track-artist-title"></h1>
-            <h2 id="track-artist"></h2>
-        </div>
-          
     </div>
 
     <script src="spoble_track.js"></script>
