@@ -14,123 +14,82 @@
     <title>Sboble Artists</title>
 </head>
 <body>
-    <div class="prompt-body">
-        <div class="input-trash">
-            <input id="input-button" placeholder="ARTIST NAME" class="input-field" type="text">
-            <button id="trash-button" onclick="trashButton()"><i class="fa-solid fa-trash fa-2x" style="color: #ffffff;"></i></button>
+
+    <header class="top-bar">
+        <a href="spoble_track.html">
+            <button id="switch-spoble-track-website">Search Songs</button>
+        </a>
+        <h2 id="beta-text">BETA</h2>
+    </header>
+
+    <div class="dashboard-grid">
+
+        <div class="grid-area-tracks">
+            <div class="top-tracks div hide">
+                <p id="tracks-title">Artist's Top 5 Trending Tracks</p>
+                <a id="tracks-clickable-1"><div class="track-row-1 trackRowAll"><img id="track1-photo" alt=""><p id="track1-text"></p></div></a>
+                <a id="tracks-clickable-2"><div class="track-row-2 trackRowAll"><img id="track2-photo" alt=""><p id="track2-text"></p></div></a>
+                <a id="tracks-clickable-3"><div class="track-row-3 trackRowAll"><img id="track3-photo" alt=""><p id="track3-text"></p></div></a>
+                <a id="tracks-clickable-4"><div class="track-row-4 trackRowAll"><img id="track4-photo" alt=""><p id="track4-text"></p></div></a>
+                <a id="tracks-clickable-5"><div class="track-row-5 trackRowAll"><img id="track5-photo" alt=""><p id="track5-text"></p></div></a>
+            </div> 
+            <p class="missing-tracks-error hide">This Artist Has No Songs</p>
         </div>
-        <button id="search-button" class="button-5" role="button" onclick="display_content()">Search</button>
+
+        <div class="grid-area-profile">
+
+            <img id="website-logo" src="website_logo.jfif" alt="website logo">
+            <h1 id="start-text">WELCOME, SEARCH A SPOTIFY ARTIST!</h1>
+            
+            <p id="name-text"></p>
+            
+            <a id="photo-clickable" href="">
+                <div class="photo div hide">
+                    <img src="" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                </div>
+            </a>
+            
+            <p class="photo-missing hide">Artist Has No Photo!</p>
+
+            <div class="followers div hide">
+                <p>Followers</p>
+                <p id="followers-text"></p>
+            </div>
+
+            <div class="prompt-body">
+                <div class="input-trash">
+                    <input id="input-button" placeholder="ARTIST NAME" class="input-field" type="text">
+                    <button id="trash-button" onclick="trashButton()">
+                        <i class="fa-solid fa-trash fa-2x" style="color: #ffffff;"></i>
+                    </button>
+                </div>
+                <button id="search-button" class="button-5" role="button" onclick="display_content()">Search</button>
+            </div>
+
+            <div class="genres div hide">
+                <p id="genres-title">Artists Genres</p>
+                <div class="genre-row-1 genreRowAll"><p id="genre1-text"></p></div>
+                <div class="genre-row-2 genreRowAll"><p id="genre2-text"></p></div>
+                <div class="genre-row-3 genreRowAll"><p id="genre3-text"></p></div>
+                <p class="missing-genres-error hide">NO GENRES</p>
+            </div>
+            
+            <p id="error-message"></p>
+        </div>
+
+        <div class="grid-area-albums">
+            <div class="albums div hide">
+                <p id="albums-title">Artists Recent Albums</p>
+                <a id="album-clickable-1" href=""><div class="album-row-1 albumRowAll"><img id="album1-photo" alt=""><p id="album1-text"></p></div></a>
+                <a id="album-clickable-2" href=""><div class="album-row-2 albumRowAll"><img id="album2-photo" alt=""><p id="album2-text"></p></div></a>
+                <a id="album-clickable-3" href=""><div class="album-row-3 albumRowAll"><img id="album3-photo" alt=""><p id="album3-text"></p></div></a>
+                <a id="album-clickable-4" href=""><div class="album-row-4 albumRowAll"><img id="album4-photo" alt=""><p id="album4-text"></p></div></a>
+                <a id="album-clickable-5" href=""><div class="album-row-5 albumRowAll"><img id="album5-photo" alt=""><p id="album5-text"></p></div></a>      
+            </div>
+            <p class="missing-albums-error hide">This Artist Has No Albums</p>
+        </div>
+
     </div>
-
-    <a href="spoble_track.html">
-        <button id="switch-spoble-track-website">Search Songs</button>
-    </a>
-
-    <h2 id="beta-text">BETA</h2>
-
-    <a id="photo-clickable" href="">
-        <div class="photo div hide">
-                <img src="" alt="">
-        </div>
-    </a>
-
-    <div class="genres div hide">
-        <p id="genres-title">Artists Genres</p>
-        <div class="genre-row-1 genreRowAll">
-            <p id="genre1-text"></p>
-        </div>
-        <div class="genre-row-2 genreRowAll">
-            <p id="genre2-text"></p>
-        </div>
-        <div class="genre-row-3 genreRowAll">
-            <p id="genre3-text"></p>
-        </div>
-    </div>
-
-    <div class="top-tracks div hide">
-        <p id="tracks-title">Artist's Top 5 Trending Tracks</p>
-        <a id="tracks-clickable-1">
-            <div class="track-row-1 trackRowAll">
-                <img id="track1-photo" alt="Album Cover Photo">
-                <p id="track1-text"></p>
-            </div>
-        </a>
-        <a id="tracks-clickable-2">
-            <div class="track-row-2 trackRowAll">
-                <img id="track2-photo" alt="Album Cover Photo">
-                <p id="track2-text"></p>
-            </div>
-        </a>
-        <a id="tracks-clickable-3">
-            <div class="track-row-3 trackRowAll">
-                <img id="track3-photo" alt="Album Cover Photo">
-                <p id="track3-text"></p>
-            </div>
-        </a>
-        <a id="tracks-clickable-4">
-            <div class="track-row-4 trackRowAll">
-                <img id="track4-photo" alt="Album Cover Photo">
-                <p id="track4-text"></p>
-            </div>
-        </a>
-        <a id="tracks-clickable-5">
-            <div class="track-row-5 trackRowAll">
-                <img id="track5-photo" alt="Album Cover Photo">
-                <p id="track5-text"></p>
-            </div>
-        </a>
-    </div>    
-     
-
-    <div class="albums div hide">
-        <p id="albums-title">Artists Recent Albums</p>
-
-        <a id="album-clickable-1" href="">
-            <div class="album-row-1 albumRowAll">
-                <img id="album1-photo" alt="Album Cover">
-                <p id="album1-text"></p>
-            </div>
-        </a>
-        <a id="album-clickable-2" href="">
-            <div class="album-row-2 albumRowAll">
-                <img id="album2-photo" alt="Album Cover">
-                <p id="album2-text"></p>
-            </div>
-        </a>
-        <a id="album-clickable-3" href="">
-            <div class="album-row-3 albumRowAll">
-                <img id="album3-photo" alt="Album Cover">
-                <p id="album3-text"></p>
-            </div>
-        </a>
-        <a id="album-clickable-4" href="">
-            <div class="album-row-4 albumRowAll">
-                <img id="album4-photo" alt="Album Cover">
-                <p id="album4-text"></p>
-            </div>
-        </a>
-        <a id="album-clickable-5" href="">
-            <div class="album-row-5 albumRowAll">
-                <img id="album5-photo" alt="Album Cover">
-                <p id="album5-text"></p>
-            </div>
-        </a>      
-    </div>    
-
-    <div class="followers div hide">
-        <p>Followers</p>
-        <p id="followers-text"></p>
-    </div>
-
-    <img id="website-logo" src="website_logo.jfif" alt="website logo">
-    <h1 id="start-text">WELCOME, SEARCH A SPOTIFY ARTIST!</h1>
-
-    <p id="name-text"></p>
-    <p id="error-message"></p>
-    <p class="photo-missing hide">Artist Has No Photo!</p>
-    <p class="missing-albums-error hide">This Artist Has No Albums</p>
-    <p class="missing-tracks-error hide">This Artist Has No Songs</p>
-    <p class="missing-genres-error hide">NO GENRES</p>
 
     <script src="script.js"></script>
 </body>
