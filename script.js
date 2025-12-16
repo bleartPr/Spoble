@@ -1,8 +1,10 @@
 function display_content() {
+    // 1. Test token validity first
     fetch('https://spotify-webapp-backend.onrender.com/test_api_token')
         .then(() => {
             const user_search = document.querySelector(".input-field").value;
 
+            // 2. Search for the artist
             fetch(`https://spotify-webapp-backend.onrender.com/get_artist_search`, {
                 method: 'POST',
                 headers: {
@@ -14,15 +16,22 @@ function display_content() {
                 .then(data => {
                     let artist_id;
                     try {
+                        // Capture the ID locally
                         artist_id = data.artists.items[0].id;
                     } catch (error) {
                         document.getElementById("error-message").innerHTML = "Sorry, This Artist Is Unavailable";
                         return;
                     }
 
-                    fetch('https://spotify-webapp-backend.onrender.com/get_artist_info')
+                    // 3. Get Artist Info (PASSING THE ID WE JUST FOUND)
+                    fetch('https://spotify-webapp-backend.onrender.com/get_artist_info', {
+                        method: 'POST', // Changed to POST to send body
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ artist_id: artist_id }) // Sending the ID
+                    })
                         .then(response => response.json())
                         .then(data => {
+                            // --- Update Profile UI ---
                             document.getElementById("website-logo").classList.add("hide");
                             document.getElementById("start-text").classList.add("hide");
 
@@ -35,7 +44,7 @@ function display_content() {
                                 document.querySelector(".photo").style.backgroundSize = 'cover';
                                 document.querySelector(".photo").classList.remove("hide");
                                 document.querySelector(".photo-missing").classList.add("hide");
-                                document.getElementById("photo-clickable").href = `https://open.spotify.com/artist/${artist_id}`;
+                                document.getElementById("photo-clickable").href = data.external_urls.spotify;
                             } catch (error) {
                                 document.querySelector(".photo").classList.add("hide");
                                 document.querySelector(".photo-missing").classList.remove("hide");
@@ -66,7 +75,12 @@ function display_content() {
 
                             document.getElementById("name-text").innerHTML = data.name;
 
-                            fetch('https://spotify-webapp-backend.onrender.com/get_artist_top_tracks')
+                            // 4. Get Top Tracks (PASSING THE ID)
+                            fetch('https://spotify-webapp-backend.onrender.com/get_artist_top_tracks', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ artist_id: artist_id }) // Sending the ID
+                            })
                                 .then(response => response.json())
                                 .then(data => {
                                     const topTracks = data.tracks.sort((a, b) => b.popularity - a.popularity).slice(0, 5);
@@ -85,7 +99,7 @@ function display_content() {
                                             }
                                             trackText.innerHTML = truncatedName_track;
                                             trackPhoto.src = track.album.images[0].url;
-                                            trackLink.href = `https://open.spotify.com/track/${track.id}`;
+                                            trackLink.href = track.external_urls.spotify;
                                             [trackText, trackPhoto, trackLink].forEach(el => el.classList.remove("hide"));
 
                                             isEmpty_tracks = false;
@@ -101,14 +115,19 @@ function display_content() {
                                     }
                                     document.querySelector(".top-tracks").classList.remove("hide");
                                 });
-                                fetch('https://spotify-webapp-backend.onrender.com/get_artist_album')
+
+                                // 5. Get Albums (PASSING THE ID)
+                                fetch('https://spotify-webapp-backend.onrender.com/get_artist_album', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ artist_id: artist_id }) // Sending the ID
+                                })
                                 .then(response => response.json())
                                 .then(data => {
                                     const topAlbums = data.items.sort((a, b) => new Date(b.release_date) - new Date(a.release_date)).slice(0, 5);
 
                                     let isEmpty = true;
                     
-                                    // Clear the previous artist's albums and display the top albums
                                     for (let i = 1; i <= 5; i++) {
                                         const albumText = document.getElementById(`album${i}-text`);
                                         const albumPhoto = document.getElementById(`album${i}-photo`);
@@ -122,7 +141,7 @@ function display_content() {
                                             }
                                             albumText.innerHTML = truncatedName;
                                             albumPhoto.src = album.images[0].url;
-                                            albumLink.href = `https://open.spotify.com/album/${album.id}`;
+                                            albumLink.href = album.external_urls.spotify;
                                             [albumText, albumPhoto, albumLink].forEach(el => el.classList.remove("hide"));
                     
                                             isEmpty = false;
@@ -149,18 +168,13 @@ function display_content() {
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-      event.preventDefault(); // Prevent the default action of the "Enter" key
-    
-      // Find the button element you want to trigger
+      event.preventDefault(); 
       var button = document.getElementById('search-button');
-    
       if (button) {
-        button.click(); // Trigger the click event on the button
+        button.click();
       }
     }
 });
-
-
 
 function trashButton() {
     const input_b = document.getElementById("input-button");
